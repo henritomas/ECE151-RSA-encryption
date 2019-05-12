@@ -1,5 +1,7 @@
 # ECE151-RSA-encryption
-ECE 151 MP2. RSA Encoder-Decoder and Brute-Force code breaker
+ECE 151 MP2. RSA Encoder-Decoder and Brute-Force code breaker. 
+- Implementation limits the encoding to only the use of prime numbers under 300, or up to only 32 bit encryption. 
+- This is only a simplfied project: secure RSA implementation must encrypt up to atleast 1024 bits to be considered secure, but is not implemented due to limited computing resources and the small scope of this project. 
 
 ## Requirements:
 - Python 2.7.16
