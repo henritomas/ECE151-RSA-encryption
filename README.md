@@ -1,4 +1,4 @@
-# ECE151-RSA-encyrption
+# ECE151-RSA-encryption
 ECE 151 MP2. RSA Encoder-Decoder and Brute-Force code breaker
 
 ## Usage:
