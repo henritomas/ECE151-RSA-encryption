@@ -5,19 +5,8 @@ import sys
 import argparse
 import math
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-l","--length", help="atleast 2^bits required to represent a symbol", default='128')
-args = parser.parse_args()
-
-length = int(args.length)
 primes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163 ,167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293]
 
-if length < 128:
-    print "Error: Atleast a value of 128 required to represent all ASCII characters uniquely."
-    sys.exit()
-elif length > primes[-1]*primes[-2]:
-    print "Error: Using primes higher than 293 (length > 82919) is outside the scope of this project."
-    sys.exit()
 
 def gcd(a, b):
     while b:
@@ -88,7 +77,21 @@ def decode(filename, n, d):
 
 
 if __name__ == '__main__':
-    n, e, d = keygen(length)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("infile", type=str, help="file to be encrypted using RSA")
+    parser.add_argument("cipherfile", type=str, help="file to be derypted using RSA")
+    parser.add_argument("-l","--length", type=int, help="atleast 2^bits required to represent a symbol", default='128')
+    args = parser.parse_args()
+
+    if args.length < 128:
+        print "Error: Atleast a value of 128 required to represent all ASCII characters uniquely."
+        sys.exit()
+    elif args.length > primes[-1]*primes[-2]:
+        print "Error: Using primes higher than 293 (length > 82919) is outside the scope of this project."
+        sys.exit()
+        
+    n, e, d = keygen(args.length)
     print("n:%d e:%d d:%d" % (n,e,d))
-    encode('alice.txt', n, e)
-    decode('encrypted_file.txt', n, d)
+    encode(args.infile, n, e)
+    decode(args.cipherfile, n, d)
